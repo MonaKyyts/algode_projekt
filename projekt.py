@@ -54,23 +54,23 @@ class AVLTree(object):
 
         #If new node is the right child of its parent and new_balance > 1
         #then perform left rotation
-        if value > root.value and new_balance > 1:
+        if value < root.value and new_balance > 1:
             return self.rotate_left(root)
         
-        #If new node is the left child of its parent and new_balance < 0
+        #If new node is the left child of its parent and new_balance < -1
         #then perform right rotation
-        if value < root.value and new_balance < -1:
+        if value > root.value and new_balance < -1:
             return self.rotate_right(root)
 
-        #If new node is the right child of its parent and new_balance < 0
+        #If new node is the right child of its parent and new_balance < -1
         #then perform right_left rotation
-        if value > root.value and new_balance < -1:
+        if value < root.value and new_balance < -1:
             root.right = self.rotate_right(root.right)
             return self.rotate_left(root)
 
         #if new node is the left child of its parent and new_balance > 1
         #then perform left_right rotation
-        if value < root.value and new_balance > 1:
+        if value > root.value and new_balance > 1:
             root.left = self.rotate_left(root.left)
             return self.rotate_right(root)
 
@@ -106,7 +106,7 @@ class AVLTree(object):
         
     #Rotate right
     def rotate_right(self, node):
-        #Just the opposite of rotete_left
+        #Just the opposite of rotate_left
         temp = node.left
         temp2 = temp.right
 
@@ -120,10 +120,14 @@ class AVLTree(object):
             
         
     #Searching from tree
-    def search(self, node):
-        if not node:
-            return False
-
+##    def search(self, value):
+##        if not self.root:
+##            return False
+##        #Search from tree as from BST
+##        elif self.root == value:
+##            return True
+##        elif value > self.root:
+##            return self.search(
         
 
     #Checking balance
