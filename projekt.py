@@ -12,6 +12,9 @@ class Node(object):
         self.right = None
         self.left = None
 
+    def to_string(self):
+        return "value: " + str(self.value) + ", height: " + str(self.height)
+
 class AVLTree(object):
     
     #Inserting a node into the tree

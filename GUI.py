@@ -1,14 +1,17 @@
 from tkinter import *
 from tkinter import messagebox
+from projekt import *
 
 
 ###############################
 #   Global variables for GUI
 ###############################
-x_gap_per_layer = [300, 140, 90, 50, 30, 20, 10]
+x_gap_per_layer = [300, 140, 80, 45, 30, 20, 10]
 y_gap_per_layer = 100
 starting_coordinates = [700, 20]
 
+myTree = AVLTree()
+root_node = None
 
 ###############################
 #   Function definitions
@@ -38,14 +41,20 @@ def draw_line(canvas, x_start, y_start, x_end, y_end):
     canvas.pack(fill=BOTH)
 
 
-def insert_new_node():
-    try:
-        i = int(number_input.get())  # Gets number from input field
-        # root_node = add_node(i)  # Adds the number to AVL-tree
-        # clear canvas  # Clear canvas to start drawing again
-        # draw_tree_recursion(canvas, root_node, starting_coordinates[0], starting_coordinates[1], 0)  # Start drawing
-    except:
-        messagebox.showerror("Value error", "Please enter a number!")
+def canvas_clear_all(canvas):
+    canvas.delete('all')
+
+
+def insert_new_node(canvas):
+    global root_node
+    #try:
+    i = int(number_input.get())  # Gets number from input field
+    root_node = myTree.insert(root_node, i) # Adds the number to AVL-tree
+    print(root_node.to_string())
+    canvas_clear_all(canvas) # Clear canvas to start drawing again
+    draw_tree_recursion(canvas, root_node, starting_coordinates[0], starting_coordinates[1], 0)  # Start drawing
+    #except:
+    #    messagebox.showerror("Value error", "Please enter a number!")
     number_textbox.delete(0, 'end')
 
 
@@ -83,27 +92,22 @@ def draw_example_tree_by_hand(canvas):
 
 
 def draw_tree_recursion(canvas, node, start_x, start_y, layer_nr):
-    return
-
     # draw circle
-    # draw_circle(canvas, start_x, start_y, str(node.value))
+    draw_circle(canvas, start_x, start_y, str(node.value))
 
     # if not (node.left_child or node.right_child)
     #     return
 
     # draw left child and line
-    # if is left child:
-    #     draw_line(canvas, start_x, start_y, tart_x-x_gap_per_layer[layer_nr], start_y+y_gap_per_layer)
-    #     draw_tree_recursion(canvas, node.left_child, start_x-x_gap_per_layer[layer_nr], start_y+y_gap_per_layer, layer_nr+1)
+    if node.left != None:
+         draw_line(canvas, start_x, start_y, start_x-x_gap_per_layer[layer_nr], start_y+y_gap_per_layer)
+         draw_tree_recursion(canvas, node.left, start_x-x_gap_per_layer[layer_nr], start_y+y_gap_per_layer, layer_nr+1)
 
     # draw right child and line
-    # if is right child:
-    #     draw_line(canvas, start_x, start_y, tart_x+x_gap_per_layer[layer_nr], start_y+y_gap_per_layer)
-    #     draw_tree_recursion(canvas, node.right_child, start_x+x_gap_per_layer[layer_nr], start_y+y_gap_per_layer, layer_nr+1)
+    if node.right != None:
+         draw_line(canvas, start_x, start_y, start_x+x_gap_per_layer[layer_nr], start_y+y_gap_per_layer)
+         draw_tree_recursion(canvas, node.right, start_x+x_gap_per_layer[layer_nr], start_y+y_gap_per_layer, layer_nr+1)
 
-
-def canvas_clear_all(canvas):
-    canvas.delete('all')
 
 
 ################################
@@ -129,7 +133,7 @@ number_input = StringVar(top_frame)
 number_textbox = Entry(top_frame, width=10, textvariable=number_input)
 number_textbox.pack(side=LEFT, pady=4, padx=4)
 
-insert_button = Button(top_frame, text="Insert", command= lambda: insert_new_node())
+insert_button = Button(top_frame, text="Insert", command= lambda: insert_new_node(canvas))
 insert_button.pack(side=LEFT, padx=4)
 
 clear_button = Button(top_frame, text="Clear", command= lambda: canvas_clear_all(canvas))
