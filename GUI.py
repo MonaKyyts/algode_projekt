@@ -60,15 +60,12 @@ def canvas_clear_all(canvas):
 def insert_new_node(canvas):
     global root_node
     global added_nodes_stack
-    #try:
+
     i = int(number_input.get())  # Gets number from input field
     added_nodes_stack.append(i)
     root_node = myTree.insert(root_node, i) # Adds the number to AVL-tree
-    print(i)
     canvas.delete('all') # Clear canvas to start drawing again
     draw_tree_recursion(canvas, root_node, starting_coordinates[0], starting_coordinates[1], 0)  # Start drawing
-    #except:
-    #    messagebox.showerror("Value error", "Please enter a number!")
     number_textbox.delete(0, 'end')
 
 
@@ -76,11 +73,10 @@ def find_node():
     global root_node
     i = int(number_input.get())
     if (myTree.search(i)):
-       messagebox.showinfo("Is {} in tree".format(i), "Yes!")
+       messagebox.showinfo("Find {}".format(i), "Yes!")
     else:
-       messagebox.showinfo("Is {} in tree".format(i), "No!")
+       messagebox.showinfo("Find {}".format(i), "No!")
     number_textbox.delete(0, 'end')
-    return
 
 
 def delete_node(canvas, i, delete_from_stack):
