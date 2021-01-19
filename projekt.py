@@ -1,3 +1,9 @@
+#Project for algorithmics course
+#Help and inspiration for this code from the following resources:
+#1.)https://en.wikipedia.org/wiki/AVL_tree
+#2.)https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
+#3.)https://codereview.stackexchange.com/questions/147614/python-avl-tree
+
 #An AVL-tree consists of a root, leafnodes and nodes
 #Class Node() is a basic class for creating a new node
 #Class AVLTree() contains all the neccessary functions for the
@@ -18,57 +24,58 @@ class Node(object):
 class AVLTree(object):
     
     #Inserting a node into the tree
-    def insert(self, node, value):
+    def insert(self, root, value):
         #Firstly we have to find the correct place to insert the node into
         #For that we use the logic of a BST to traverse through the tree
         #and find the correct place for our new node
 
-        if not node:
+        #If there is no root then now this is the new root
+        if not root:
             return Node(value)
         
-        elif value < node.value:
-            #New value is smaller than node value, traverse left
-            node.left = self.insert(node.left, value)
+        elif value < root.value:
+            #New value is smaller than root value, traverse left
+            root.left = self.insert(root.left, value)
         else:
-            #New value is bigger than node value, traverse right
-            node.right = self.insert(node.right, value)
+            #New value is bigger than root value, traverse right
+            root.right = self.insert(root.right, value)
 
         #Now that the new value has been added to the tree we must update the
         #height of our tree. Height of an AVL-tree = 1 + max(leftsubtreeHeight,
         #rightsubtreeHeight)
 
-        node.height = 1 + max(self.tree_height(node.left), self.tree_height(node.right))
+        root.height = 1 + max(self.tree_height(root.left), self.tree_height(root.right))
 
         #After updating the height of our tree we have to check if it is balanced
         #or not. For that we find the difference between subtree heights. If it is
         #more than 1 then the tree is unbalanced
 
-        new_balance = self.balance(node)
+        new_balance = self.balance(root)
 
         #If new node is the right child of its parent and new_balance > 1
         #then perform left rotation
-        if value > node.value and new_balance > 1:
-            return self.rotate_left(node)
+        if value > root.value and new_balance > 1:
+            return self.rotate_left(root)
         
         #If new node is the left child of its parent and new_balance < 0
         #then perform right rotation
-        if value < node.value and new_balance < 0:
-            return self.rotate_right(node)
+        if value < root.value and new_balance < -1:
+            return self.rotate_right(root)
 
         #If new node is the right child of its parent and new_balance < 0
         #then perform right_left rotation
-        if value > node.value and new_balance < 0:
-            node.right = self.rotate_right(node.right)
-            return self.rotate_left(node)
+        if value > root.value and new_balance < -1:
+            root.right = self.rotate_right(root.right)
+            return self.rotate_left(root)
 
         #if new node is the left child of its parent and new_balance > 1
         #then perform left_right rotation
-        if value < node.value and new_balance > 1:
-            node.left = self.rotate_left(node.left)
-            return self.rotate_right(node)
+        if value < root.value and new_balance > 1:
+            root.left = self.rotate_left(root.left)
+            return self.rotate_right(root)
 
-        #If tree is not out of balance just return the node
-        return node
+        #If tree is not out of balance just return the root
+        return root
 
         
     #Deleting from the three
@@ -125,8 +132,8 @@ class AVLTree(object):
         if not node:
             return 0
 
-        #Else balance = height(rightsubtree(node)) - height(leftsubtree(node))
-        return self.tree_height(node.right) - self.tree_height(node.left)
+        #Else balance = height(leftsubtree(node)) - height(rightsubtree(node))
+        return self.tree_height(node.left) - self.tree_height(node.right)
 
 
 
