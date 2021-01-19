@@ -122,14 +122,16 @@ class AVLTree(object):
             
         
     #Searching from tree
-##    def search(self, value):
-##        if not self.root:
-##            return False
-##        #Search from tree as from BST
-##        elif self.root == value:
-##            return True
-##        elif value > self.root:
-##            return self.search(
+    def search(self, value):
+        if not root:
+            return False
+        #Search from tree as from BST
+        elif self.root == value:
+            return True
+        elif value > self.root:
+            return self.search(root.right)
+        else:
+            return self.search(root.left)
         
 
     #Checking balance

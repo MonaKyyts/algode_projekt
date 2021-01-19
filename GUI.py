@@ -61,13 +61,13 @@ def insert_new_node(canvas):
 
 
 def find_node():
-    #global root_node
-    #i = int(number_input.get())
-    #if (AVLTree has node):
-    #   messagebox.showinfo("Is {} in tree".format(i), "Yes!")
-    #else:
-    #   messagebox.showinfo("Is {} in tree".format(i), "No!")
-    #number_textbox.delete(0, 'end')
+    global root_node
+    i = int(number_input.get())
+    if (myTree.search(i)):
+       messagebox.showinfo("Is {} in tree".format(i), "Yes!")
+    else:
+       messagebox.showinfo("Is {} in tree".format(i), "No!")
+    number_textbox.delete(0, 'end')
     return
 
 
