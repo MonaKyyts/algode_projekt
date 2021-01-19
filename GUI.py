@@ -5,7 +5,7 @@ from tkinter import messagebox
 ###############################
 #   Global variables for GUI
 ###############################
-x_gap_per_layer = [300, 140, 90, 50, 30, 20]
+x_gap_per_layer = [300, 140, 90, 50, 30, 20, 10]
 y_gap_per_layer = 100
 starting_coordinates = [700, 20]
 
