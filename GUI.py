@@ -51,8 +51,10 @@ def draw_line(canvas, x_start, y_start, x_end, y_end):
 
 def canvas_clear_all(canvas):
     global root_node
+    global added_nodes_stack
     root_node = None
     canvas.delete('all')
+    added_nodes_stack = []
 
 
 def insert_new_node(canvas):
@@ -99,6 +101,7 @@ def delete_node(canvas, i, delete_from_stack):
     draw_tree_recursion(canvas, root_node, starting_coordinates[0], starting_coordinates[1], 0)  # Start drawing
     number_textbox.delete(0, 'end')
     return
+
 
 def undo_change(canvas):
     tuple = get_from_stack()
