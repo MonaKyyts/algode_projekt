@@ -175,7 +175,7 @@ class AVLTree(object):
             return True
         elif value > root.value and (root.right != None):
             return self.search(root.right, value)
-        elif value < self.value and (root.left != None:
+        elif value < root.value and (root.left != None):
             return self.search(root.left, value)
         else:
             return False
