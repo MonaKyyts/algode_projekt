@@ -72,7 +72,7 @@ def insert_new_node(canvas):
 def find_node():
     global root_node
     i = int(number_input.get())
-    if (myTree.search(i)):
+    if myTree.search(root_node, i):
        messagebox.showinfo("Find {}".format(i), "Yes!")
     else:
        messagebox.showinfo("Find {}".format(i), "No!")

@@ -154,13 +154,13 @@ class AVLTree(object):
             
         
     #Searching from tree
-    def search(self, value):
-        if value == self.value:
+    def search(self, root, value):
+        if value == root.value:
             return True
-        elif value > self.value:
-            return self.search(root.right)
-        elif value < self.value:
-            return self.search(root.left)
+        elif value > root.value and (root.right is not None):
+            return self.search(root.right, value)
+        elif value < root.value and (root.left is not None):
+            return self.search(root.left, value)
         else:
             return False
         
@@ -173,11 +173,3 @@ class AVLTree(object):
 
         #Else balance = height(leftsubtree(node)) - height(rightsubtree(node))
         return self.tree_height(node.left) - self.tree_height(node.right)
-
-
-
-
-
-
-
-    
