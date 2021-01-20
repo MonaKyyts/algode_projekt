@@ -12,7 +12,7 @@
 class Node(object):
     def __init__(self, value):
         #Every node has a value. Some nodes (leaf nodes) may have left or right
-        #branch. Hight of a node is 1
+        #branch. Height of a node is 1
         self.value = value
         self.height = 1
         self.right = None
@@ -81,6 +81,38 @@ class AVLTree(object):
 
         
     #Deleting from the three
+
+    def delete(self, value):
+        if value > self.value:
+            self.right = self.delete(self.right, value)
+        elif value < self.value:
+            self.left = self.delete(self.left, value)
+        else:
+            if self.right == None:
+                if self.left != None:
+                    temp = self.left
+                    self = temp
+                else:
+                    temp = self
+                    self = None
+                
+            elif self.left == None:
+                if self.right != None:
+                    temp = self.right
+                    self = temp
+                else:
+                    temp = self
+                    self = None
+            else:
+                temp1 = self.left
+                temp2 = self.right
+
+                self = min(temp1.value, temp2.value)
+                self.right = max(temp1.value, temp2.value)
+
+        #Update the height of the tree
+        #self.height = 
+            
         
     #Height check
     def tree_height(self, node):
@@ -113,7 +145,7 @@ class AVLTree(object):
         temp2 = temp.right
 
         temp.right = node
-        node.left = temp2
+        node.left = temp2 
 
         node.height = 1 + max(self.tree_height(node.right), self.tree_height(node.left))
         temp.height = 1 + max(self.tree_height(temp.right), self.tree_height(temp.left))
@@ -123,15 +155,14 @@ class AVLTree(object):
         
     #Searching from tree
     def search(self, value):
-        if not root:
-            return False
-        #Search from tree as from BST
-        elif self.root == value:
+        if value == self.value:
             return True
-        elif value > self.root:
+        elif value > self.value:
             return self.search(root.right)
-        else:
+        elif value < self.value:
             return self.search(root.left)
+        else:
+            return False
         
 
     #Checking balance
