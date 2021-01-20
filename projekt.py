@@ -54,7 +54,7 @@ class AVLTree(object):
 
         #If new node is the right child of its parent and new_balance > 1
         #then perform left rotation
-        if new_balance < -1 and value > root.right.value:
+        if new_balance < -1 and value >= root.right.value:
             return self.rotate_left(root)
 
         # If new node is the left child of its parent and new_balance < -1
