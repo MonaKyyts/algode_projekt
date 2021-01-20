@@ -83,7 +83,9 @@ class AVLTree(object):
     #Deleting from the three
 
     def delete(self, root, value):
-        if value > root.value:
+        if not root:
+            return
+        elif value > root.value:
             root.right = self.delete(root.right, value)
         elif value < root.value:
             root.left = self.delete(root.left, value)
