@@ -3,6 +3,7 @@
 #1.)https://en.wikipedia.org/wiki/AVL_tree
 #2.)https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
 #3.)https://codereview.stackexchange.com/questions/147614/python-avl-tree
+#4.)https://www.geeksforgeeks.org/avl-tree-set-2-deletion/
 
 #An AVL-tree consists of a root, leafnodes and nodes
 #Class Node() is a basic class for creating a new node
