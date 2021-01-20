@@ -104,20 +104,23 @@ class AVLTree(object):
             root.value = temp.value
             root.right = self.delete(root.right, temp.value)
 
+        if root is None:
+            return root
+
         #Update the height of the tree
         root.height = 1 + max(self.tree_height(root.left), self.tree_height(root.right))
 
         #Check if tree is still balanced
         new_balance = self.balance(root)
 
-        if new_balance < -1 and value >= root.right.value:
+        if new_balance < -1 and self.balance(root.right) <= 0:
             return self.rotate_left(root)
-        if new_balance > 1 and value < root.left.value:
+        if new_balance > 1 and self.balance(root.left) >= 0:
             return self.rotate_right(root)
-        if new_balance < -1 and value < root.right.value:
+        if new_balance < -1 and self.balance(root.right) > 0:
             root.right = self.rotate_right(root.right)
             return self.rotate_left(root)
-        if new_balance > 1 and value > root.left.value:
+        if new_balance > 1 and self.balance(root.left) < 0:
             root.left = self.rotate_left(root.left)
             return self.rotate_right(root)
 
@@ -178,7 +181,7 @@ class AVLTree(object):
             return True
         elif value > root.value and (root.right != None):
             return self.search(root.right, value)
-        elif value < self.value and (root.left != None):
+        elif value < root.value and (root.left != None):
             return self.search(root.left, value)
         else:
             return False
@@ -192,11 +195,3 @@ class AVLTree(object):
 
         #Else balance = height(leftsubtree(node)) - height(rightsubtree(node))
         return self.tree_height(node.left) - self.tree_height(node.right)
-
-
-
-
-
-
-
-    
