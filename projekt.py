@@ -79,9 +79,8 @@ class AVLTree(object):
         #If tree is not out of balance just return the root
         return root
 
-        
-    #Deleting from the three
 
+    #Deleting from the three
     def delete(self, root, value):
         if value > root.value:
             root.right = self.delete(root.right, value)
@@ -114,7 +113,7 @@ class AVLTree(object):
         root.height = 1 + max(self.tree_height(root.left), self.tree_height(root.right))
 
         #Check if tree is still balanced
-        balance = self.balance(root)
+        new_balance = self.balance(root)
 
         if new_balance < -1 and value >= root.right.value:
             return self.rotate_left(root)
