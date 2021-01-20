@@ -85,6 +85,7 @@ class AVLTree(object):
     def delete(self, root, value):
         if not root:
             return root
+
         elif value > root.value:
             root.right = self.delete(root.right, value)
         elif value < root.value:
@@ -134,8 +135,8 @@ class AVLTree(object):
             return root
         elif root.left == None:
             return root
-        else:
-            self.min_value(root.left)
+
+        return self.min_value(root.left)
         
     #Height check
     def tree_height(self, node):

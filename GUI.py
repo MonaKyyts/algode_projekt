@@ -91,7 +91,7 @@ def delete_node(canvas, i, delete_from_stack):
     if delete_from_stack:
         added_nodes_stack.remove(i)
 
-    root_node = myTree.delete(root_node, i)  # Adds the number to AVL-tree # UNCOMMENT IT!
+    root_node = myTree.delete(root_node, i)  # Adds the number to AVL-tree
     canvas.delete('all')  # Clear canvas to start drawing again
     draw_tree_recursion(canvas, root_node, starting_coordinates[0], starting_coordinates[1], 0)  # Start drawing
     number_textbox.delete(0, 'end')
